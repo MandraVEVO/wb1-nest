@@ -7,6 +7,12 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
    <h1>Websocket - Client</h1>
 
    <span id="server-status">Offline</span>
+
+  <ul id="client-ul">
+  <li>HOLA PAPU</li>
+  </ul>
+
+
   </div>
 `
 connectToServer();

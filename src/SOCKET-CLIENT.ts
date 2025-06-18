@@ -12,12 +12,29 @@ export const connectToServer = ()=> {
 }
 
 const addlisteners = (socket: Socket) => {
+
     const serverStatus = document.querySelector<HTMLSpanElement>("#server-status");
+    const clientUl = document.querySelector("#client-ul");
 
     socket.on('connect',()=>{
-        serverStatus.innerHTML = "Connected";
+        if (serverStatus) {
+            serverStatus.innerHTML = "Connected";
+        }
     })
     socket.on('disconnect',()=>{
-        serverStatus.innerHTML = "Disconnected";
+        if (serverStatus) {
+            serverStatus.innerHTML = "Disconnected";
+        }
+    })
+
+    socket.on('clients-updated', (clients: string[]) => {
+        let clientsHtml = "";
+        clients.forEach(client => {
+            clientsHtml += `<li>${client}</li>`;
+        });
+
+        if (clientUl) {
+            clientUl.innerHTML = clientsHtml;
+        }
     })
 }
